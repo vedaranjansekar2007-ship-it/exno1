@@ -26,147 +26,49 @@ STEP 6: Use zscore of to remove outliers
 # Coding and Output
 ```
 import pandas as pd
-df=pd.read_csv('SAMPLEIDS.csv')
-df
-```
-<img width="1006" height="743" alt="image" src="https://github.com/user-attachments/assets/4f3729bc-9395-423f-af42-ae2bc8e05082" />
-
-```
-df.head()
-```
-
-<img width="860" height="189" alt="image" src="https://github.com/user-attachments/assets/fff8b6a9-07c0-42be-b36e-ca6e1e7213be" />
-
-```
-df.tail()
-```
-
-<img width="888" height="192" alt="image" src="https://github.com/user-attachments/assets/68225ea1-5818-448d-bad7-429c14ae2a91" />
-
-```
-df.isnull()
-```
-
-<img width="777" height="706" alt="image" src="https://github.com/user-attachments/assets/57ee48a3-1bd9-4c94-ab3d-e69e2c9cba51" />
-
-```
-df.notnull()
-```
-
-<img width="769" height="706" alt="image" src="https://github.com/user-attachments/assets/0db37aea-1dd6-40dc-9e58-2244a61e6671" />
-
-```
-df.isnull().sum()
-```
-
-<img width="131" height="278" alt="image" src="https://github.com/user-attachments/assets/7282a3e5-b6e2-4d16-815e-27194d6ef34e" />
-
-```
-df.dropna(axis=0)
-```
-
-<img width="922" height="451" alt="image" src="https://github.com/user-attachments/assets/7ffc1566-4a3d-4525-9a93-60986142394e" />
-
-```
-df.dropna(axis=0)
-```
-
-<img width="896" height="449" alt="image" src="https://github.com/user-attachments/assets/9458e914-a737-4bcf-bfe0-af208c87c05a" />
-
-```
-df.dropna(axis=1)
-```
-
-<img width="273" height="711" alt="image" src="https://github.com/user-attachments/assets/0fc1cdb1-6847-4d0d-86ca-0c9efafcb700" />
-
-```
-df.fillna(_)
-```
-
-<img width="923" height="708" alt="image" src="https://github.com/user-attachments/assets/8a9867b5-1151-465b-bd3d-ed205d61966e" />
-
-```
-df.fillna(method='ffill')
-```
-
-<img width="904" height="707" alt="image" src="https://github.com/user-attachments/assets/68a8db09-2465-4bc7-a263-029f9d7471fd" />
-
-```
-df.fillna(method='bfill')
-```
-
-<img width="909" height="702" alt="image" src="https://github.com/user-attachments/assets/dd30a5e6-ed52-48e5-afaa-c6541efad4a1" />
-
-```
-df.fillna({'GENDER':'MALE','NAME':'SANTHOSH','ADDRESS':'KANCHIPURAM','M1':'76.0','M2':'69.0','M3':'80.0','M4':'76.0','TOTAL':'301.0','AVG':'100.333333'})
-```
-
-<img width="920" height="699" alt="image" src="https://github.com/user-attachments/assets/103c2c81-e3a8-4a66-8fab-19d2b369bd24" />
-
-```
-import pandas as pd
-ir=pd.read_csv("iris.csv")
-ir
-```
-
-<img width="559" height="430" alt="image" src="https://github.com/user-attachments/assets/c83b4180-39dd-474d-844e-87116d757537" />
-
-```
-ir.describe()
-```
-
-<img width="488" height="297" alt="image" src="https://github.com/user-attachments/assets/39d88ca5-3c33-4fdb-bbec-a50e62abf788" />
-
-```
-import seaborn as sns
-sns.boxplot(x='sepal_width',data=ir)
-```
-
-<img width="651" height="541" alt="image" src="https://github.com/user-attachments/assets/57e3e51e-646c-4a68-8f25-1e081b268e0c" />
-
-```
-Q1=ir.sepal_width.quantile(0.25)
-Q3=ir.sepal_width.quantile(0.75)
-IQR=Q3-Q1
-print(IQR)
-```
-
-<img width="56" height="34" alt="image" src="https://github.com/user-attachments/assets/d97e8c6c-3217-4bab-9062-611bf5b30dbe" />
-
-```
-rid=ir[(ir.sepal_width<(Q1-1.5*IQR))|(ir.sepal_width>(Q3+1.5*IQR))]
-rid['sepal_width']
-```
-
-<img width="340" height="109" alt="image" src="https://github.com/user-attachments/assets/1b4f4b86-0f17-4ac8-af88-d055a373f4ff" />
-
-```
-delid=ir[~((ir.sepal_width<(Q1-1.5*IQR))|(ir.sepal_width>(Q3+1.5*IQR)))]
-delid
-```
-
-<img width="605" height="432" alt="image" src="https://github.com/user-attachments/assets/b216982f-8a9f-4682-8945-e3311899aec2" />
-
-```
-sns.boxplot(x='sepal_width',data=delid)
-```
-
-<img width="729" height="572" alt="image" src="https://github.com/user-attachments/assets/b388cf23-721a-4d5d-8aed-140b565f72ec" />
-
-```
 import numpy as np
-import scipy.stats as stats
-xyz=np.abs(stats.zscore(ir['sepal_width']))
-xyz
+import matplotlib.pyplot as plt
+from scipy import stats
+from sklearn.ensemble import IsolationForest  
+df = pd.read_csv(r"C:\Users\acer\Downloads\Data_set (1).csv") 
+display(df.head())
 ```
+<img width="1720" height="547" alt="Screenshot 2025-10-16 081212" src="https://github.com/user-attachments/assets/4e1889d0-6bf6-4282-bda4-7d9f2feb1539" />
+```
+print(df.info())
+```
+<img width="640" height="516" alt="Screenshot 2025-10-16 081235" src="https://github.com/user-attachments/assets/4b38c92e-032a-473a-9620-91af626e6f98" /> 
+```
+display(df.describe(include='all').T) 
+```
+<img width="1503" height="541" alt="Screenshot 2025-10-16 081304" src="https://github.com/user-attachments/assets/22fe81e1-d7f2-4431-89ae-851a3fb77029" /> 
+```
+print("\nMissing values per column:")
+print(df.isna().sum()) 
+```
+<img width="440" height="395" alt="Screenshot 2025-10-16 081326" src="https://github.com/user-attachments/assets/eef8fa73-450d-4a93-acdf-812655ac9eed" /> 
+```
+num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+print("Numeric columns:", num_cols) 
+```
+<img width="1205" height="31" alt="Screenshot 2025-10-16 083408" src="https://github.com/user-attachments/assets/946884dd-41e2-4df5-8352-aa14b58fca31" />
+```
+for c in num_cols:
+    plt.figure(figsize=(6,2))
+    plt.title(f"Boxplot: {c}")
+    plt.boxplot(df[c].dropna())
+    plt.xlabel(c)
+    plt.show() 
+```
+<img width="997" height="749" alt="Screenshot 2025-10-16 083643" src="https://github.com/user-attachments/assets/c945f084-87b0-427f-905f-adf9bae90fcc" /> 
+<img width="919" height="751" alt="Screenshot 2025-10-16 083740" src="https://github.com/user-attachments/assets/0bef52af-eb74-4f74-90cd-df2c6edee580" /> 
+<img width="1018" height="436" alt="Screenshot 2025-10-16 083829" src="https://github.com/user-attachments/assets/fa6fbfc2-5b67-4c0d-9c60-d61aacec1bba" /> 
 
-<img width="473" height="253" alt="image" src="https://github.com/user-attachments/assets/4b174e9a-5443-4c33-a56b-b8e9bd084e0e" />
 
-```
-ir1=ir[xyz>3]
-ir1
-```
-<img width="672" height="100" alt="image" src="https://github.com/user-attachments/assets/c84aa576-d572-4e40-97c3-91a36ec9adfb" />
+
+
+
+
 
 # Result
 
